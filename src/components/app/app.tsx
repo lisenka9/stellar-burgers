@@ -21,6 +21,7 @@ import { getUser } from '../../services/slices/userSlice/userSlice'; // Экше
 import { getIngredients } from '../../services/slices/ingredientSlice/ingredientSlice'; // Экшен для получения ингредиентов
 import { CenteringComponent } from '../centering-component/centering-component'; // Компонент-обёртка
 
+// Настройка всех маршрутов
 const App = () => {
   const location = useLocation(); // Хук для получения текущего пути
   const dispatch = useDispatch(); // Хук для диспетчера Redux
