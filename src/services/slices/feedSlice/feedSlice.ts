@@ -51,9 +51,9 @@ export const feedSlice = createSlice({
         // Успешный запрос
         state.loading = false;
         state.error = null;
-        state.orders = action.payload.orders; // Обновление списка заказов
-        state.total = action.payload.total; // Общее количество
-        state.totalToday = action.payload.totalToday; // Заказов за сегодня
+        state.orders = action.payload?.orders || []; // Обновление списка заказов
+        state.total = action.payload?.total || 0; // Общее количество
+        state.totalToday = action.payload?.totalToday || 0; // Заказов за сегодня
       });
   }
 });

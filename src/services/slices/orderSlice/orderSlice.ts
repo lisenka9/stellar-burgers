@@ -52,7 +52,7 @@ export const orderSlice = createSlice({
         state.error = null;
         state.request = false;
         // Сохраняем первый заказ из ответа (API возвращает массив)
-        state.orderByNumberResponse = action.payload.orders[0];
+        state.orderByNumberResponse = action.payload.orders[0] || null;
       });
   }
 });

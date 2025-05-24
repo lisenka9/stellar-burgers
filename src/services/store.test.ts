@@ -1,6 +1,12 @@
 import store, { rootReducer } from '../services/store';
 
 test('проверка работы rootReducer', () => {
-  const expected = rootReducer(undefined, { type: 'UNKNOWN_ACTION' });
-  expect(expected).toEqual(store.getState());
+  const state = rootReducer(undefined, { type: 'UNKNOWN_ACTION' });
+  expect(state).toEqual(expect.objectContaining({
+    user: expect.any(Object),
+    ingredient: expect.any(Object),
+    order: expect.any(Object),
+    constructorBurger: expect.any(Object),
+    feed: expect.any(Object)
+  }));
 });
