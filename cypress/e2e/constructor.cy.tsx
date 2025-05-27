@@ -31,6 +31,10 @@ describe('Проверка аккаунта пользователя', () => {
     }).as('getUser');
   });
 
+  afterEach(() => {
+    cy.clearCookies();
+    cy.clearLocalStorage();
+  });
   it('Должен переходить в профиль после авторизации', () => {
     cy.loginByApi();
     cy.visit('/');
@@ -54,6 +58,11 @@ describe('Проверка конструктора бургеров', () => {
     cy.visit('/');
     cy.wait('@getIngredients');
     cy.contains(SELECTORS.constructorTitle, { timeout: 10000 }).should('exist');
+  });
+
+  afterEach(() => {
+    cy.clearCookies();
+    cy.clearLocalStorage();
   });
 
   it('Не должно быть булки в начале', () => {
@@ -88,20 +97,31 @@ describe('Проверка конструктора бургеров', () => {
     cy.contains(SELECTORS.orderConfirmation).should('be.visible');
     cy.get('body').type('{esc}');
     cy.contains(SELECTORS.bunPlaceholder).should('exist');
+    cy.contains(SELECTORS.fillingPlaceholder).should('exist');
+    cy.get('[class^="burger-constructor_ingredients"]').should('not.exist');
   });
 
   it('Должно открываться и закрываться модальное окно ингредиента', () => {
     cy.contains(SELECTORS.bunOption).click();
     cy.location('pathname').should('include', '/ingredients/');
+    cy.contains('Краторная булка').should('exist');
+    cy.contains('Детали ингредиента').should('exist');
+    cy.contains(SELECTORS.bunOption).should('exist');
+    cy.contains('Калории, ккал').should('exist');
+    cy.contains('420').should('exist'); 
+    cy.contains('Белки, г').should('exist');
+    cy.contains('80').should('exist'); 
     cy.get('body').type('{esc}');
     cy.location('href').should('eq', SELECTORS.homeUrl);
   });
 
-it('Должно закрываться модальное окно через клик на оверлей', () => {
-  cy.contains(SELECTORS.bunOption).click();
-  cy.url().should('include', '/ingredients/');
-  cy.contains('Детали ингредиента').should('exist');
-  cy.go('back');
-  cy.url().should('eq', SELECTORS.homeUrl);
-});
+  it('Должно закрываться модальное окно через клик на оверлей', () => {
+    cy.contains(SELECTORS.bunOption).click();
+    cy.url().should('include', '/ingredients/');
+    cy.contains('Детали ингредиента').should('exist');
+    cy.contains(SELECTORS.bunOption).should('exist');
+    cy.go('back');
+    cy.url().should('eq', SELECTORS.homeUrl);
+    cy.contains('Детали ингредиента').should('not.exist');
+  });
 });
