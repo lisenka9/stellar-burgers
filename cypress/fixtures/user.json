@@ -1,9 +1,7 @@
 {
   "success": true,
-  "accessToken": "lorem",
-  "refreshToken": "ipsum",
   "user": {
-    "email": "mainbum@oldbumbarbershop.ru",
-    "name": "OldBum"
+    "email": "mail@example.com",
+    "name": "User_test"
   }
 }
